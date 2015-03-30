@@ -1,0 +1,9 @@
+﻿<Window x:Class="Nekopomf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nekopomf" Height="350" Width="525"
+        KeyDown="Window_KeyDown">
+    <Grid>
+        <TextBox Name="URLBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="497" Margin="10,144,0,0"/>
+    </Grid>
+</Window>
