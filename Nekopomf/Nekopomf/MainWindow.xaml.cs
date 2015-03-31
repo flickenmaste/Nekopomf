@@ -30,9 +30,21 @@ namespace Nekopomf
         {
             InitializeComponent();
 
+            BitmapImage bimage = new BitmapImage();
+            bimage.BeginInit();
+            bimage.UriSource = new Uri("./Resources/yayoi.png", UriKind.Relative);  // picture in window
+            bimage.EndInit();
+            Girl.Source = bimage;
+
+            BitmapImage bimage2 = new BitmapImage();
+            bimage2.BeginInit();
+            bimage2.UriSource = new Uri("./Resources/logo.png", UriKind.Relative);  // picture in window
+            bimage2.EndInit();
+            Logo.Source = bimage2;
+
             // http://stackoverflow.com/questions/10230579/easiest-way-to-have-a-program-minimize-itself-to-the-system-tray-using-net-4
             System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
-            ni.Icon = new System.Drawing.Icon("./eek.ico");
+            ni.Icon = new System.Drawing.Icon("./Resources/eek.ico");   // tray icon
             ni.Visible = true;
             ni.DoubleClick +=
                 delegate(object sender, EventArgs args)
@@ -44,27 +56,29 @@ namespace Nekopomf
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.V))
+            if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.V))   // if ctrl+v hit upload paste
             {
                 if (System.Windows.Clipboard.ContainsImage())
                 {
+                    URLBox.Text = "";
                     string fileUrl = null;
                     BitmapSource bitmapSource = System.Windows.Clipboard.GetImage();
 
-                    JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
                     MemoryStream memoryStream = new MemoryStream();
                     BitmapImage bImg = new BitmapImage();
 
                     encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
                     //encoder.Save(memoryStream);
 
-                    string path = "./temp.jpg";
+                    string path = "./temp.png";
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
-                        encoder.Save(fileStream);
+                        encoder.Save(fileStream);   // Save temp img
                         fileStream.Close();
                     }
 
+                    #region Upload
                     // credit to https://github.com/mavanmanen/Scotty/blob/master/Scotty/Program.cs for this stuff
                     FileStream fileStream2 = new FileStream(path, FileMode.Open, FileAccess.Read);
 
@@ -73,7 +87,7 @@ namespace Nekopomf
                     fileStream2.Close();
                     fileStream2.Dispose();
 
-                    byte[] xArray = Encoding.ASCII.GetBytes("------BOUNDARYBOUNDARY----\r\ncontent-disposition: form-data; name=\"id\"\r\n\r\n\r\n------BOUNDARYBOUNDARY----\r\ncontent-disposition: form-data; name=\"files[]\"; filename=\"temp.jpg\"\r\nContent-type: image/jpg\r\n\r\n");
+                    byte[] xArray = Encoding.ASCII.GetBytes("------BOUNDARYBOUNDARY----\r\ncontent-disposition: form-data; name=\"id\"\r\n\r\n\r\n------BOUNDARYBOUNDARY----\r\ncontent-disposition: form-data; name=\"files[]\"; filename=\"temp.png\"\r\nContent-type: image/png\r\n\r\n");
                     byte[] boundaryByteArray = Encoding.ASCII.GetBytes("\r\n------BOUNDARYBOUNDARY----");
 
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://pomf.se/upload.php");
@@ -137,16 +151,45 @@ namespace Nekopomf
                         }
                         json = null;
                     }
+                    #endregion
 
-                    URLBox.Text = "http://a.pomf.se/" + fileUrl;
-                    File.Delete(path);
+                    URLBox.Text = "http://a.pomf.se/" + fileUrl + " has been copied to the clipboard.";
+                    if (AudioCheck.IsChecked != true)
+                        (new System.Media.SoundPlayer("./Resources/eye.wav")).Play();   // Play audio
+                    System.Windows.Clipboard.SetText("http://a.pomf.se/" + fileUrl, System.Windows.TextDataFormat.Text);    // Copy to clipboard
+
+                    if (LogCheck.IsChecked == true)
+                    {
+                        using (var fileStream = new FileStream("./log.txt", FileMode.Append))   // Save log of pastes
+                        {
+                            string linky = "http://a.pomf.se/" + fileUrl + " " + System.DateTime.Now.ToString() + Environment.NewLine;
+                            byte[] linkyArray = Encoding.ASCII.GetBytes(linky);
+                            fileStream.Write(linkyArray, 0, linkyArray.Length);
+                            fileStream.Close();
+                        }
+                    }
+                    
+                    if (LocalCopyCheck.IsChecked == true)
+                    {
+                        string localCopyPath = "./saved/" + fileUrl + ".png";
+                        using (var fileStream = new FileStream(localCopyPath, FileMode.Create)) // Save local copy of paste
+                        {
+                            PngBitmapEncoder localEncoder = new PngBitmapEncoder();
+                            localEncoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                            localEncoder.Save(fileStream);
+                            fileStream.Close();
+                        }
+                    }
+
+                    File.Delete(path);  // Delete temp image
                 }
             }
         }
 
         protected override void OnStateChanged(EventArgs e)
         {
-            if (WindowState == System.Windows.WindowState.Minimized)
+            if (WindowState == System.Windows.WindowState.Minimized)    // Minimize to tray
+
                 this.Hide();
 
             base.OnStateChanged(e);
