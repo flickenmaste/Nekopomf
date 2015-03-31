@@ -10,11 +10,12 @@
                 <GradientStop Color="#FF343232" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TextBox Name="URLBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="497" Margin="10,40,0,0" Background="#FFB4B4B4"/>
-        <CheckBox Name="LogCheck" Content="Save paste to log" HorizontalAlignment="Left" Margin="399,297,0,0" VerticalAlignment="Top" Background="White"/>
-        <CheckBox Name="LocalCopyCheck" Content="Save local copy" HorizontalAlignment="Left" Margin="296,297,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="AudioCheck" Content="Mute Audio" HorizontalAlignment="Left" Margin="211,297,0,0" VerticalAlignment="Top"/>
-        <Image Name="Girl" HorizontalAlignment="Left" Height="250" Margin="6,63,0,0" VerticalAlignment="Top" Width="250"/>
-        <Image Name="Logo" HorizontalAlignment="Left" Height="175" Margin="296,93,0,0" VerticalAlignment="Top" Width="175"/>
+        <Image x:Name="Logo" HorizontalAlignment="Left" Height="175" Margin="296,93,0,0" VerticalAlignment="Top" Width="175"/>
+        <Image x:Name="Girl" HorizontalAlignment="Left" Height="250" Margin="6,63,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="URLBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="497" Margin="10,40,0,0" Background="#FFB4B4B4"/>
+        <CheckBox x:Name="LogCheck" Content="Save paste to log" HorizontalAlignment="Left" Margin="399,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
+        <CheckBox x:Name="LocalCopyCheck" Content="Save local copy" HorizontalAlignment="Left" Margin="296,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
+        <CheckBox x:Name="AudioCheck" Content="Mute Audio" HorizontalAlignment="Left" Margin="211,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
     </Grid>
 </Window>
+    
