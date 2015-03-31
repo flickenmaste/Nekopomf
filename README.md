@@ -1,10 +1,10 @@
 # Nekopomf
 Pomf.se uploader  
 
-Copy any picture from your web browser or by any snipping tool software and paste into the program.  
-  
-For building source code:  
-Move .ico file in Resources to your bin/Debug or bin/Release folders  
+How to:  
+Copy any picture from your web browser or by any snipping tool/printscreen  
+Paste(ctrl+v) into the window  
+File will upload and your link will be automatically copied to your clipboard  
 
 Releases:  
 https://github.com/flickenmaste/Nekopomf/releases
