@@ -86,6 +86,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SnippingTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SnippingTool.Designer.cs">
+      <DependentUpon>SnippingTool.cs</DependentUpon>
+    </Compile>
     <Compile Include="Upload.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

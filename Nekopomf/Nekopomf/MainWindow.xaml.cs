@@ -34,7 +34,8 @@ namespace Nekopomf
             URLBox.IsEnabled = false;
 
             KeyBinding upload = new KeyBinding();
-            NHotkey.Wpf.HotkeyManager.Current.AddOrReplace("Upload", Key.Add, ModifierKeys.Control | ModifierKeys.Alt, UploadScreenShot);
+            NHotkey.Wpf.HotkeyManager.Current.AddOrReplace("Upload", Key.Add, ModifierKeys.Control | ModifierKeys.Alt, UploadScreenShot);   // hotkey to upload prtsrn
+            NHotkey.Wpf.HotkeyManager.Current.AddOrReplace("Snip", Key.Subtract, ModifierKeys.Control | ModifierKeys.Alt, SnipScreenShot);  // hotkey to use snipping tool
 
             BitmapImage bimage = new BitmapImage();
             bimage.BeginInit();
@@ -58,6 +59,19 @@ namespace Nekopomf
                     this.Show();
                     this.WindowState = WindowState.Normal;
                 };
+        }
+
+        private void SnipScreenShot(object sender, HotkeyEventArgs e)
+        {
+            Upload myUpload = new Upload();
+            var bmp = SnippingTool.Snip();
+            if (bmp != null)
+            {
+                System.Windows.Forms.Clipboard.SetImage(bmp);
+                URLBox.IsEnabled = true;
+                myUpload.UploadPNG();
+                URLBox.IsEnabled = false;
+            }
         }
 
         private void UploadScreenShot(object sender, HotkeyEventArgs e)
