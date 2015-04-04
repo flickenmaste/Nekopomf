@@ -148,7 +148,7 @@ namespace Nekopomf
             File.Delete(path);  // Delete temp image
         }
 
-        public void UploadPNG()
+        static public void UploadPNG()
         {
             if (System.Windows.Clipboard.ContainsImage())
             {

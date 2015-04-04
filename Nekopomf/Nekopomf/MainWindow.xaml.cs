@@ -65,22 +65,20 @@ namespace Nekopomf
 
         private void SnipScreenShot(object sender, HotkeyEventArgs e)
         {
-            Upload myUpload = new Upload();
             var bmp = SnippingTool.Snip();
             if (bmp != null)
             {
                 System.Windows.Forms.Clipboard.SetImage(bmp);
                 URLBox.IsEnabled = true;
-                myUpload.UploadPNG();
+                Upload.UploadPNG();
                 URLBox.IsEnabled = false;
             }
         }
 
         private void UploadScreenShot(object sender, HotkeyEventArgs e)
         {
-            Upload myUpload = new Upload();
             URLBox.IsEnabled = true;
-            myUpload.UploadPNG();
+            Upload.UploadPNG();
             URLBox.IsEnabled = false;
         }
 
@@ -88,9 +86,8 @@ namespace Nekopomf
         {
             if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.V))   // if ctrl+v hit upload paste
             {
-                Upload myUpload = new Upload();
                 URLBox.IsEnabled = true;
-                myUpload.UploadPNG();
+                Upload.UploadPNG();
                 URLBox.IsEnabled = false;
             }
         }
