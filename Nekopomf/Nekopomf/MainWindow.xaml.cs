@@ -19,6 +19,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using NHotkey;
+using DataFormats = System.Windows.DataFormats;
+using DragEventArgs = System.Windows.DragEventArgs;
 
 namespace Nekopomf
 {
@@ -100,6 +102,31 @@ namespace Nekopomf
                 this.Hide();
 
             base.OnStateChanged(e);
+        }
+
+        private void DropUpload(object sender, DragEventArgs e)
+        {
+            // SO on DnD http://stackoverflow.com/questions/3861902/c-wpf-drag-drop-images
+
+            // check if we actually dropped anything
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // valid image extensions
+                var validExtensions = new[] { ".png", ".jpg" };
+
+                // get file listing
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                // magical LINQ stuff
+                IEnumerable<string> lst = (IEnumerable<string>) e.Data.GetData(DataFormats.FileDrop);
+
+                // loop over each item that has an image extension
+                foreach (var item in lst.Where(item => validExtensions.Contains(System.IO.Path.GetExtension(item))))
+                {
+                    // create and upload a BitmapImage for it
+                    Upload.UploadPNG(new BitmapImage(new Uri(item)));
+                }
+            }
         }
     }
 }
