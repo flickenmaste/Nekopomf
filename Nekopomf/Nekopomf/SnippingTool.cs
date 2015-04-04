@@ -35,6 +35,7 @@ namespace Nekopomf
         public SnippingTool(Image screenShot)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
             this.BackgroundImage = screenShot;
             this.ShowInTaskbar = false;
             this.FormBorderStyle = FormBorderStyle.None;

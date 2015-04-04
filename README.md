@@ -3,8 +3,9 @@ Pomf.se uploader
 
 How to:  
 Copy any picture from your web browser  
-Use hotkey CTRL ALT + or Paste(ctrl+v) into the window  
-Use hotkey CTRL ALT - to snip a screenshot  
+Use hotkey CTRL INSERT or Paste(ctrl+v) into the window  
+Use hotkey CTRL PrtScn to snip a screenshot  
+Drag and drop images from your file explorer  
 File will upload and your link will be automatically copied to your clipboard  
 
 Releases:  
