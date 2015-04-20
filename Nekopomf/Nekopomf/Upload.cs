@@ -24,8 +24,18 @@ namespace Nekopomf
 {
     class Upload
     {
-        public static void UploadFile(string path)
+        public static bool UploadFile(string path)
         {
+            const int NEKOPOMF_FILESIZELIMIT = 52428800;    // that's 50MB if we're talking binary
+
+            // check if we are within nekopomf's file upload limit
+            if (new FileInfo(path).Length > NEKOPOMF_FILESIZELIMIT)
+            {
+                ((MainWindow) System.Windows.Application.Current.MainWindow).URLBox.Text =
+                    "The file you are trying to upload is too big for pomf.se! (50MB)";
+                return false;
+            }
+
             string fileUrl = null;
             string fileName = System.IO.Path.GetFileName(path);
 
@@ -99,6 +109,7 @@ namespace Nekopomf
             catch (Exception eeek)
             {
                 Console.Write(eeek);
+                return false;
             }
 
             if (responseContent != null)
@@ -133,6 +144,8 @@ namespace Nekopomf
                     fileStream.Close();
                 }
             }
+
+            return true;
         }
 
         // Uploads a single bitmap image to pomf.se
