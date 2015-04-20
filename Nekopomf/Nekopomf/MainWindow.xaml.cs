@@ -90,6 +90,11 @@ namespace Nekopomf
                 Upload.UploadPNG();
                 URLBox.IsEnabled = false;
             }
+
+            if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.H)) // if ctrl+h open log
+            {
+                System.Diagnostics.Process.Start(@"log.txt");
+            }
         }
 
         protected override void OnStateChanged(EventArgs e)
