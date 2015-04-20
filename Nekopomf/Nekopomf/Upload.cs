@@ -262,7 +262,12 @@ namespace Nekopomf
 
             if (((MainWindow)System.Windows.Application.Current.MainWindow).LocalCopyCheck.IsChecked == true)
             {
-                string localCopyPath = "./saved/" + fileUrl + ".png";
+                if (!Directory.Exists("./saved/"))
+                {
+                    Directory.CreateDirectory("./saved");
+                }
+
+                string localCopyPath = "./saved/" + fileUrl;
                 using (var fileStream = new FileStream(localCopyPath, FileMode.Create)) // Save local copy of paste
                 {
                     PngBitmapEncoder localEncoder = new PngBitmapEncoder();
