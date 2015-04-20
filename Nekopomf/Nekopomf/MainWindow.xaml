@@ -16,6 +16,7 @@
         <CheckBox x:Name="LogCheck" Content="Save paste to log" HorizontalAlignment="Left" Margin="399,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
         <CheckBox x:Name="LocalCopyCheck" Content="Save local copy" HorizontalAlignment="Left" Margin="296,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
         <CheckBox x:Name="AudioCheck" Content="Mute Audio" HorizontalAlignment="Left" Margin="211,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
+        <Button Content="Open Log" HorizontalAlignment="Left" Margin="417,270,0,0" VerticalAlignment="Top" Width="75" Click="OpenLogClick"/>
     </Grid>
 </Window>
     

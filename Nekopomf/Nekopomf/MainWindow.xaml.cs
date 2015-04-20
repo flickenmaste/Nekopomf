@@ -121,5 +121,11 @@ namespace Nekopomf
                 }
             }
         }
+
+        private void OpenLogClick(object sender, RoutedEventArgs e)
+        {
+            // open the log file w/ associated program
+            System.Diagnostics.Process.Start(@"log.txt");
+        }
     }
 }
