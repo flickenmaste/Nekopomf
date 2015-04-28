@@ -18,7 +18,8 @@
         <CheckBox x:Name="LocalCopyCheck" Content="Save local copy" HorizontalAlignment="Left" Margin="296,279,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
         <CheckBox x:Name="AudioCheck" Content="Mute Audio" HorizontalAlignment="Left" Margin="399,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
         <CheckBox x:Name="DisableUpload" Content="Don't Upload" HorizontalAlignment="Left" Margin="296,297,0,0" VerticalAlignment="Top" TextElement.Foreground="AntiqueWhite"/>
-        <Button Content="Open Log" HorizontalAlignment="Left" Margin="417,252,0,0" VerticalAlignment="Top" Width="75" Click="OpenLogClick"/>
+        <Button Content="Open Log" HorizontalAlignment="Left" Margin="417,252,0,0" VerticalAlignment="Top" Width="75" Click="OpenLogClick" IsEnabled="True"/>
+        <Button Content="Open Saved" HorizontalAlignment="Left" Margin="319,252,0,0" VerticalAlignment="Top" Width="75" Click="OpenSavedClick" IsEnabled="True"/>
     </Grid>
 </Window>
     

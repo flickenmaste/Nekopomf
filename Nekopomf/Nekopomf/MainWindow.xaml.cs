@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,6 +134,22 @@ namespace Nekopomf
             {
                 // open the log file w/ associated program
                 System.Diagnostics.Process.Start(@"log.txt");
+            }
+        }
+
+        private void OpenSavedClick(object sender, RoutedEventArgs e)
+        {
+            if(Directory.Exists("./saved/"))
+            {
+                Process process = new Process
+                {
+                    StartInfo =
+                    {
+                        UseShellExecute = true,
+                        FileName = Directory.GetCurrentDirectory() + "/saved/"
+                    }
+                };
+                process.Start();
             }
         }
     }
