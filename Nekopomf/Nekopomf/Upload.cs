@@ -281,7 +281,12 @@ namespace Nekopomf
             {
                 if (!Directory.Exists("./saved/"))
                 {
-                    Directory.CreateDirectory("./saved");
+                    Directory.CreateDirectory("./saved/");
+                }
+
+                if (fileUrl == null || (fileUrl.Trim() == String.Empty))
+                {
+                    fileUrl = Guid.NewGuid().ToString().Substring(0, 5) + ".png";
                 }
 
                 string localCopyPath = "./saved/" + fileUrl;
