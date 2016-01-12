@@ -129,19 +129,19 @@ namespace Nekopomf
             #endregion
 
             // show URL to upload
-            ((MainWindow)System.Windows.Application.Current.MainWindow).URLBox.Text = "http://a.loveisover.me/" + fileUrl + " has been copied to the clipboard.";
+            ((MainWindow)System.Windows.Application.Current.MainWindow).URLBox.Text = "" + fileUrl + " has been copied to the clipboard.";
             
             // play upload sound
             if (((MainWindow)System.Windows.Application.Current.MainWindow).AudioCheck.IsChecked != true)
                 (new System.Media.SoundPlayer("./Resources/eye.wav")).Play();   // Play audio
-            System.Windows.Clipboard.SetText("http://a.loveisover.me/" + fileUrl, System.Windows.TextDataFormat.Text);    // Copy to clipboard
+            System.Windows.Clipboard.SetText("" + fileUrl, System.Windows.TextDataFormat.Text);    // Copy to clipboard
 
             // copy upload URL into log
             if (((MainWindow)System.Windows.Application.Current.MainWindow).LogCheck.IsChecked == true)
             {
                 using (var fileStream = new FileStream("./log.txt", FileMode.Append))   // Save log of pastes
                 {
-                    string linky = "http://a.loveisover.me/" + fileUrl + " " + System.DateTime.Now.ToString() + Environment.NewLine;
+                    string linky = "https://my.mixtape.moe/" + fileUrl + " " + System.DateTime.Now.ToString() + Environment.NewLine;
                     byte[] linkyArray = Encoding.ASCII.GetBytes(linky);
                     fileStream.Write(linkyArray, 0, linkyArray.Length);
                     fileStream.Close();
@@ -187,7 +187,7 @@ namespace Nekopomf
             byte[] xArray = Encoding.ASCII.GetBytes("------BOUNDARYBOUNDARY----\r\ncontent-disposition: form-data; name=\"id\"\r\n\r\n\r\n------BOUNDARYBOUNDARY----\r\ncontent-disposition: form-data; name=\"files[]\"; filename=\"temp.png\"\r\nContent-type: null\r\n\r\n");
             byte[] boundaryByteArray = Encoding.ASCII.GetBytes("\r\n------BOUNDARYBOUNDARY----");
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://img.loveisover.me/upload.php");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://mixtape.moe/upload.php");
             request.Method = "POST";
 
             //Client
@@ -199,7 +199,7 @@ namespace Nekopomf
             request.ContentType = "multipart/form-data; boundary=----BOUNDARYBOUNDARY----";
 
             //Miscellaneous                
-            request.Referer = "http://img.loveisover.me/";
+            request.Referer = "https://mixtape.moe/";
 
             //Transport
             request.KeepAlive = true;
@@ -252,16 +252,16 @@ namespace Nekopomf
 
 
 
-            ((MainWindow)System.Windows.Application.Current.MainWindow).URLBox.Text = "http://a.loveisover.me/" + fileUrl + " has been copied to the clipboard.";
+            ((MainWindow)System.Windows.Application.Current.MainWindow).URLBox.Text = "" + fileUrl + " has been copied to the clipboard.";
             if (((MainWindow)System.Windows.Application.Current.MainWindow).AudioCheck.IsChecked != true)
                 (new System.Media.SoundPlayer("./Resources/eye.wav")).Play();   // Play audio
-            System.Windows.Clipboard.SetText("http://a.loveisover.me/" + fileUrl, System.Windows.TextDataFormat.Text);    // Copy to clipboard
+            System.Windows.Clipboard.SetText("" + fileUrl, System.Windows.TextDataFormat.Text);    // Copy to clipboard
 
             if (((MainWindow)System.Windows.Application.Current.MainWindow).LogCheck.IsChecked == true)
             {
                 using (var fileStream = new FileStream("./log.txt", FileMode.Append))   // Save log of pastes
                 {
-                    string linky = "http://a.loveisover.me/" + fileUrl + " " + System.DateTime.Now.ToString() + Environment.NewLine;
+                    string linky = "https://my.mixtape.moe/" + fileUrl + " " + System.DateTime.Now.ToString() + Environment.NewLine;
                     byte[] linkyArray = Encoding.ASCII.GetBytes(linky);
                     fileStream.Write(linkyArray, 0, linkyArray.Length);
                     fileStream.Close();

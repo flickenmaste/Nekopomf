@@ -65,6 +65,8 @@ namespace Nekopomf
 
         private void SnipScreenShot(object sender, HotkeyEventArgs e)
         {
+            if (SnippingTool.isSnipping)
+                return;
             var bmp = SnippingTool.Snip();
             if (bmp != null)
             {

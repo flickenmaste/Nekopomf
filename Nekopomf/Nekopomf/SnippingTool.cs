@@ -14,8 +14,10 @@ namespace Nekopomf
 {
     public partial class SnippingTool : Form
     {
+        public static bool isSnipping;
         public static Image Snip()
         {
+            isSnipping = true;
             var rc = Screen.PrimaryScreen.Bounds;
             using (Bitmap bmp = new Bitmap(rc.Width, rc.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb))
             {
@@ -25,6 +27,7 @@ namespace Nekopomf
                 {
                     if (snipper.ShowDialog() == DialogResult.OK)
                     {
+                        isSnipping = false;
                         return snipper.Image;
                     }
                 }
