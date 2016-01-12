@@ -261,7 +261,7 @@ namespace Nekopomf
             {
                 using (var fileStream = new FileStream("./log.txt", FileMode.Append))   // Save log of pastes
                 {
-                    string linky = "https://my.mixtape.moe/" + fileUrl + " " + System.DateTime.Now.ToString() + Environment.NewLine;
+                    string linky = "" + fileUrl + " " + System.DateTime.Now.ToString() + Environment.NewLine;
                     byte[] linkyArray = Encoding.ASCII.GetBytes(linky);
                     fileStream.Write(linkyArray, 0, linkyArray.Length);
                     fileStream.Close();
@@ -275,7 +275,12 @@ namespace Nekopomf
                     Directory.CreateDirectory("./saved");
                 }
 
-                string localCopyPath = "./saved/" + fileUrl;
+                // gen random filename for local copy
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxy";
+                var randumb = new Random();
+                var randumbstring = new string(Enumerable.Repeat(chars, 10).Select(s => s[randumb.Next(s.Length)]).ToArray());
+
+                string localCopyPath = "./saved/" + randumbstring + ".png";
                 using (var fileStream = new FileStream(localCopyPath, FileMode.Create)) // Save local copy of paste
                 {
                     PngBitmapEncoder localEncoder = new PngBitmapEncoder();
