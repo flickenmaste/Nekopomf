@@ -29,6 +29,7 @@ namespace Nekopomf
     /// </summary>
     public partial class MainWindow : Window
     {
+        System.Windows.Forms.NotifyIcon ni;
         public MainWindow()
         {
             InitializeComponent();
@@ -52,7 +53,7 @@ namespace Nekopomf
             Logo.Source = bimage2;
 
             // http://stackoverflow.com/questions/10230579/easiest-way-to-have-a-program-minimize-itself-to-the-system-tray-using-net-4
-            System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+            ni = new System.Windows.Forms.NotifyIcon();
             ni.Icon = new System.Drawing.Icon("./Resources/eek.ico");   // tray icon
             ni.Visible = true;
             ni.DoubleClick +=
@@ -136,6 +137,13 @@ namespace Nekopomf
                 // open the log file w/ associated program
                 System.Diagnostics.Process.Start(@"log.txt");
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ni.Visible = false;
+            ni.Icon.Dispose();
+            System.Windows.Forms.Application.DoEvents();
         }
     }
 }
