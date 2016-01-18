@@ -263,12 +263,8 @@ namespace Nekopomf
                     Directory.CreateDirectory("./saved");
                 }
 
-                // gen random filename for local copy
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxy";
-                var randumb = new Random();
-                var randumbstring = new string(Enumerable.Repeat(chars, 10).Select(s => s[randumb.Next(s.Length)]).ToArray());
-
-                string localCopyPath = "./saved/" + randumbstring + ".png";
+                Uri uri = new Uri(fileUrl);
+                string localCopyPath = "./saved/" + System.IO.Path.GetFileName(uri.AbsolutePath);
                 using (var fileStream = new FileStream(localCopyPath, FileMode.Create)) // Save local copy of paste
                 {
                     PngBitmapEncoder localEncoder = new PngBitmapEncoder();
