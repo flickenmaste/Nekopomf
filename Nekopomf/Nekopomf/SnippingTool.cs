@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 // http://stackoverflow.com/questions/3123776/net-equivalent-of-snipping-tool/3124252#3124252
 // http://stackoverflow.com/questions/4005910/make-net-snipping-tool-compatible-with-multiple-monitors
@@ -18,11 +12,18 @@ namespace Nekopomf
         public static Image Snip()
         {
             isSnipping = true;
-            var rc = Screen.PrimaryScreen.Bounds;
-            using (Bitmap bmp = new Bitmap(rc.Width, rc.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb))
+
+            Point topLeft = new Point(SystemInformation.VirtualScreen.Left, SystemInformation.VirtualScreen.Top);
+            Point bottomRight = new Point(SystemInformation.VirtualScreen.Right, SystemInformation.VirtualScreen.Bottom);
+
+            Point screenDims = new Point(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
+
+            using (Bitmap bmp = new Bitmap(screenDims.X,
+                                           screenDims.Y,
+                                           System.Drawing.Imaging.PixelFormat.Format32bppPArgb))
             {
                 using (Graphics gr = Graphics.FromImage(bmp))
-                    gr.CopyFromScreen(0, 0, 0, 0, bmp.Size);
+                    gr.CopyFromScreen(topLeft.X, topLeft.Y, 0, 0, bmp.Size);
                 using (var snipper = new SnippingTool(bmp))
                 {
                     if (snipper.ShowDialog() == DialogResult.OK)
@@ -39,10 +40,12 @@ namespace Nekopomf
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
+            Location = new Point(SystemInformation.VirtualScreen.Left, SystemInformation.VirtualScreen.Top);
+            Size = new Size(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
             this.BackgroundImage = screenShot;
             this.ShowInTaskbar = false;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Normal;
             this.DoubleBuffered = true;
             this.TopMost = true;
         }

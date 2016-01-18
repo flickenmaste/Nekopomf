@@ -1,24 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Net;
 using System.IO;
-// https://www.nuget.org/packages/Newtonsoft.Json/
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Windows.Forms;
-using NHotkey;
+
+using Newtonsoft.Json.Linq;             // https://www.nuget.org/packages/Newtonsoft.Json/
 
 namespace Nekopomf
 {
@@ -155,8 +143,8 @@ namespace Nekopomf
         // TODO: consolidate this into UploadFile
         public static void UploadPNG(BitmapSource bitmapSource)
         {
-            string uploadURL = System.Configuration.ConfigurationSettings.AppSettings["uploadURL"];
-            string uploadBaseURL = System.Configuration.ConfigurationSettings.AppSettings["uploadBaseURL"];
+            string uploadURL = ConfigurationManager.AppSettings["uploadURL"];
+            string uploadBaseURL = ConfigurationManager.AppSettings["uploadBaseURL"];
             string fileUrl = null;
 
             PngBitmapEncoder encoder = new PngBitmapEncoder();
